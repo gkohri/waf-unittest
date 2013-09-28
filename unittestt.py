@@ -41,7 +41,7 @@ from waflib import Options, Task, Utils, Logs, Errors
 C1 = '#XXX'.encode()
 C2 = '#YYY'.encode()
 UNPACK_DIR = '.unittest-gtest'
-GTEST_DIR = 'gtest-1.6.0/fused-src'
+GTEST_DIR = 'gtest-1.7.0/fused-src'
 
 def cleanup():
   import shutil
@@ -262,6 +262,7 @@ def summary(bld):
         if not code:
             Logs.pprint('GREEN', '    %s' % f)
             if isinstance(Options.options.checkfilter, str):
+                print(err)
                 print(out)
 
     if fail>0:
@@ -269,6 +270,7 @@ def summary(bld):
         for (f, code, out, err) in lst:
             if code:
                 Logs.pprint('RED', '    %s' % f)
+                print(err.decode('utf-8'))
                 print(out.decode('utf-8'))
         raise Errors.WafError('test failed')
 
